@@ -1,19 +1,22 @@
 import 'package:flutter_class/Books.dart';
+import 'package:flutter_class/TextBooks.dart';
 
 class BookManagementSystem {
-  List<Books> _books = [];
+  List<Books> collection = [];
 
+  // Add Book To Collection
   void addBook(Books book) {
-    _books.add(book);
+    collection.add(book);
   }
 
+  // Remove Book From Collection
   void removeBook(String isbn) {
-    _books.removeWhere((book) => book.isbn == isbn);
+    collection.removeWhere((book) => book.isbn == isbn);
   }
 
-  //update Book Status
+  // Update Book Status
   void updateBookStatus(String isbn, BookStatus newStatus) {
-    for (Books book in _books) {
+    for (Books book in collection) {
       if (book.isbn == isbn) {
         book.updateStatus(newStatus);
         return;
@@ -22,27 +25,32 @@ class BookManagementSystem {
     throw Exception('Book not found');
   }
 
-  //Search By Title
-  List<Books> searchByTitle(String title) {
+  // Search By Title
+  List<Books> searchByTitle(String title){
     List<Books> foundBooks = [];
 
-    for (Books book in _books) {
-      if (book.title.toLowerCase().contains(title.toLowerCase())) {
-        foundBooks.add(book);
+    for (Books books in collection) {
+      if (books.title.toLowerCase().contains(title.toLowerCase())){
+        foundBooks.add(books);
       }
     }
     return foundBooks;
   }
 
-  //Search By Author
-  List<Books> searchByAuthor(String author) {
+  // Search By Author
+  List<Books> searchByAuthor(String author){
     List<Books> foundBooks = [];
 
-    for (var book in _books) {
-      if (book.author.toLowerCase().contains(author.toLowerCase())) {
-        foundBooks.add(book);
+    for (Books books in collection) {
+      if (books.author.toLowerCase().contains(author.toLowerCase())){
+        foundBooks.add(books);
       }
     }
     return foundBooks;
+  }
+
+  //Basic Filtering Method
+  List<Books> filterByStatus(BookStatus status){
+    return collection.where((book) => book.status == status).toList();
   }
 }

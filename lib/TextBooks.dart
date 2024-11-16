@@ -11,13 +11,14 @@ class TextBooks extends Books {
     }
   }
 
+  //Getters to retrieve subjectArea and gradeLevel properties
   String get subjectArea => _subjectArea;
   int get gradeLevel => _gradeLevel;
 
+  //Setters to update subjectArea and gradeLevel properties
   set subjectArea(String subjectArea){
     _subjectArea = subjectArea;
   }
-
   set gradeLevel(int gradeLevel){
     if (gradeLevel >= 1 && gradeLevel <= 12){
       _gradeLevel = gradeLevel;
